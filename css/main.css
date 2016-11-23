@@ -10,7 +10,6 @@ body {
   height: 50vh;
   min-height: 250px;
   margin: auto;
-  background-color: #eee;
   overflow: hidden;
   position: relative;
 }
@@ -19,19 +18,18 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 20000em;
-	height: 50vh;
-	min-height: 250px;
-  /*transition: margin-left .5s ease;*/
+	width: 100%;
+	height: 100%;
+  transition: transform .5s ease;
 }
 
 .slide {
-  position: relative;
-  float: left;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
+  background-color: #777;
 }
 
 .slide h2 {

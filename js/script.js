@@ -7,22 +7,25 @@ var cur = 0,
 	slideWidth = slide[cur].offsetWidth;
 	numOfSlides = slide.length;
 
+for (var i = cur; i < numOfSlides; i++) {
+	slide[i].style.setProperty('left', slideWidth * i + 'px');
+}
+
 function changeSlide(direction) {
 	switch(direction) {
 		case 'left':
 			cur--;
 			if(cur < 0) cur = numOfSlides - 1;
-			
 			console.log('left', cur);
 			break;
 
 		case 'right':
 			cur++;
 			if(cur == numOfSlides) cur = 0;
-			
 			console.log('right', cur);
 			break;
 	}
+	container[0].style.setProperty('transform', 'translate3d(' + (-slideWidth * cur) + 'px, 0, 0');
 };
 
 controls[0].addEventListener('click', function(e) {
