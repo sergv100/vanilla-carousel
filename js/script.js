@@ -1,23 +1,27 @@
 var cur = 0,
+	container = document.getElementsByClassName('slider-inner'),
 	slide = document.getElementsByClassName('slide'),
 	controls = document.getElementsByClassName('controls'),
 	prevBtn = document.getElementsByClassName('controls-btn_prev'),
 	nextBtn = document.getElementsByClassName('controls-btn_next'),
-	len = slide.length;
-
-	console.log(slideW);
+	slideWidth = slide[cur].offsetWidth;
+	numOfSlides = slide.length;
 
 function changeSlide(direction) {
 	switch(direction) {
 		case 'left':
-		console.log('left');
-
-		break;
+			cur--;
+			if(cur < 0) cur = numOfSlides - 1;
+			
+			console.log('left', cur);
+			break;
 
 		case 'right':
-		console.log('right');
-
-		break;
+			cur++;
+			if(cur == numOfSlides) cur = 0;
+			
+			console.log('right', cur);
+			break;
 	}
 };
 
