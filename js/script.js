@@ -9,9 +9,9 @@ var numOfSlides = slide.length;
 var right = 1;
 var left = -1;
 
-for (var i = cur; i < numOfSlides; i++) {
-    slide[i].style.setProperty('left', slideWidth * i + 'px');
-}
+
+[].slice.call(slide).map(function(e, i) { e.style.left = slideWidth * i + 'px' });
+
 
 function changeSlide(direction) {
     cur += direction;
