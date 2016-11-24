@@ -5,32 +5,24 @@ var cur = 0,
     prevBtn = document.getElementsByClassName('controls-btn_prev'),
     nextBtn = document.getElementsByClassName('controls-btn_next'),
     slideWidth = slide[cur].offsetWidth;
-numOfSlides = slide.length;
+var numOfSlides = slide.length;
+var right = 1;
+var left = -1;
 
 for (var i = cur; i < numOfSlides; i++) {
     slide[i].style.setProperty('left', slideWidth * i + 'px');
 }
 
 function changeSlide(direction) {
-    switch (direction) {
-        case 'left':
-            cur--;
-            if (cur < 0) cur = numOfSlides - 1;
-            console.log('left', cur);
-            break;
+    cur += direction;
+    if (cur < 0) cur = numOfSlides - 1;
+    if (cur === numOfSlides) cur = 0;
 
-        case 'right':
-            cur++;
-            if (cur == numOfSlides) cur = 0;
-            console.log('right', cur);
-            break;
-    }
     container[0].style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
 };
 
 controls[0].addEventListener('click', function(e) {
-
-    e.target == prevBtn[0] && changeSlide('left');
-    e.target == nextBtn[0] && changeSlide('right');
+    e.target == prevBtn[0] && changeSlide(left);
+    e.target == nextBtn[0] && changeSlide(right);
 
 });
