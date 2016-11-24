@@ -44,6 +44,7 @@ function changeSlide(direction) {
     }
 
     container.style.transform = 'translateX(' + (-slideWidth * cur) + 'px';
+    // As we changing X-axis only there is no need in translate3d.
 };
 
 controls.addEventListener('click', function(e) {
@@ -51,5 +52,6 @@ controls.addEventListener('click', function(e) {
 
     e.target === prevBtn && changeSlide(left);
     e.target === nextBtn && changeSlide(right);
+    // querySelector made us get rid of those ugly []
 
 });
