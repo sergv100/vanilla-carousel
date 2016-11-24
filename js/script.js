@@ -1,5 +1,5 @@
 var cur = 0,
-    container = document.getElementsByClassName('slider-inner'),
+    container = document.querySelector('.slider-inner'),
     slide = document.getElementsByClassName('slide'),
     controls = document.getElementsByClassName('controls'),
     prevBtn = document.getElementsByClassName('controls-btn_prev'),
@@ -9,20 +9,25 @@ var numOfSlides = slide.length;
 var right = 1;
 var left = -1;
 
-
 [].slice.call(slide).map(function(e, i) { e.style.left = slideWidth * i + 'px' });
-
 
 function changeSlide(direction) {
     cur += direction;
-    if (cur < 0) cur = numOfSlides - 1;
-    if (cur === numOfSlides) cur = 0;
+    container.style.transition = 'transform .5s ease';
+    if (cur < 0) {
+        container.style.transition = 'none';
+        cur = numOfSlides - 1
+    };
+    if (cur === numOfSlides) {
+        container.style.transition = 'none';
+        cur = 0
+    };
 
-    container[0].style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
+    container.style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
 };
 
 controls[0].addEventListener('click', function(e) {
-    e.target == prevBtn[0] && changeSlide(left);
-    e.target == nextBtn[0] && changeSlide(right);
+    e.target === prevBtn[0] && changeSlide(left);
+    e.target === nextBtn[0] && changeSlide(right);
 
 });
