@@ -25,7 +25,7 @@ function changeSlide(direction) {
             console.log('right', cur);
             break;
     }
-    container[0].style.setProperty('transform', 'translate3d(' + (-slideWidth * cur) + 'px, 0, 0');
+    container[0].style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
 };
 
 controls[0].addEventListener('click', function(e) {
