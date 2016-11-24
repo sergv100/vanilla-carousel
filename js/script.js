@@ -15,13 +15,17 @@ function changeSlide(direction) {
     cur += direction;
     container.style.transition = 'transform .5s ease';
     if (cur < 0) {
-        container.style.transition = 'none';
-        cur = numOfSlides - 1
-    };
+        resetTransition();
+        cur = numOfSlides - 1;
+    }
     if (cur === numOfSlides) {
+        resetTransition();
+        cur = 0;
+    }
+
+    function resetTransition() {
         container.style.transition = 'none';
-        cur = 0
-    };
+    }
 
     container.style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
 };
