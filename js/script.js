@@ -9,15 +9,19 @@ var numOfSlides = slide.length;
 var right = 1;
 var left = -1;
 
-[].slice.call(slide).map(function(e, i) { e.style.left = slideWidth * i + 'px' });
+[].slice.call(slide).map(function(element, index) {
+    element.style.left = slideWidth * index + 'px'
+});
 
 function changeSlide(direction) {
     cur += direction;
     container.style.transition = 'transform .5s ease';
+
     if (cur < 0) {
         resetTransition();
         cur = numOfSlides - 1;
     }
+
     if (cur === numOfSlides) {
         resetTransition();
         cur = 0;
@@ -27,7 +31,7 @@ function changeSlide(direction) {
         container.style.transition = 'none';
     }
 
-    container.style.setProperty('transform', 'translateX(' + (-slideWidth * cur) + 'px');
+    container.style.transform = 'translateX(' + (-slideWidth * cur) + 'px';
 };
 
 controls[0].addEventListener('click', function(e) {
