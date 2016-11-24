@@ -1,48 +1,57 @@
-var cur = 0,
-	container = document.getElementsByClassName('slider-inner'),
-	slide = document.getElementsByClassName('slide'),
-	controls = document.getElementsByClassName('controls'),
-	prevBtn = document.getElementsByClassName('controls-btn_prev'),
-	nextBtn = document.getElementsByClassName('controls-btn_next'),
-	slideWidth = slide[cur].offsetWidth;
-	numOfSlides = slide.length;
+var cur = 0;
+var container = document.querySelector('.slider-inner'),
+    prevBtn = document.querySelector('.controls-btn_prev'),
+    nextBtn = document.querySelector('.controls-btn_next'),
+    controls = document.querySelector('.controls'),
+    slide = document.querySelectorAll('.slide');
+// Using query selector to get rid of ugly array indexes :3
 
-for (var i = cur; i < numOfSlides; i++) {
-	slide[i].style.setProperty('left', slideWidth * i + 'px');
-}
+var slideWidth = slide[cur].offsetWidth;
+var numOfSlides = slide.length;
+
+var right = 1;
+var left = -1;
+// Now we have directions as not string literals but numeric values.
+
+[].slice.call(slide).map(function(element, index) {
+    element.style.left = slideWidth * index + 'px'
+});
+// We create a virtual `array` object which we map through and change 
+// the position of slider elements.
 
 function changeSlide(direction) {
-	switch(direction) {
-		case 'left':
-			cur--;
-			if(cur < 0) cur = numOfSlides - 1;
-			console.log('left', cur);
-			break;
+    cur += direction;
+    // As our direction argument receives a numeric value we get rid
+    // of the `switch` cases by just adding or subtracting from `cur` value.
 
-		case 'right':
-			cur++;
-			if(cur == numOfSlides) cur = 0;
-			console.log('right', cur);
-			break;
-	}
-	container[0].style.setProperty('transform', 'translate3d(' + (-slideWidth * cur) + 'px, 0, 0');
+    container.style.transition = 'transform .5s ease';
+    // Defaulting transition behaviour.
+
+    if (cur < 0) {
+        resetTransition();
+        cur = numOfSlides - 1;
+    }
+
+    if (cur === numOfSlides) {
+        resetTransition();
+        cur = 0;
+    }
+
+    function resetTransition() {
+        // As our divs are chained we need to hide the left-to-right
+        // and right-to-left pulls.
+        container.style.transition = 'none';
+    }
+
+    container.style.transform = 'translateX(' + (-slideWidth * cur) + 'px';
+    // As we changing X-axis only there is no need in translate3d.
 };
 
-controls[0].addEventListener('click', function(e) {
-	var target = e.target,
-		direction = 'right';
+controls.addEventListener('click', function(e) {
+    // We do not need any other variables or logic here.
 
-	if( target == prevBtn[0] ) {
-		
-		direction = 'left';
-		changeSlide(direction);
-	}
+    e.target === prevBtn && changeSlide(left);
+    e.target === nextBtn && changeSlide(right);
+    // querySelector made us get rid of those ugly []
 
-	if( target == nextBtn[0] ) {
-		
-		direction = 'right';
-		changeSlide(direction);
-	}
 });
-
-
